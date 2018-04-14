@@ -54,9 +54,9 @@ int main()
         process[pos]=temp;
     }
 
+/*
     waitTime[0]=0;            //waiting time for first process is zero
 
-/*
      //calculate waiting time
     for(i=1;i<n;i++)
     {
@@ -72,6 +72,8 @@ int main()
 */
 
     cout<<"\nProcess\t    Burst Time    \tWaiting Time\tTurnaround Time";
+
+/*
     for(i=0;i<n;i++)
     {
         turnaroundTime[i]=burstTime[i]+waitTime[i];     //calculate turnaround time
@@ -80,25 +82,47 @@ int main()
     }
 
     avg_tat=total/n;     //average turnaround time
+*/
+    avgWaitTime = calcAvgWaitTime();
+    avgTurnaroundTime
+
     cout<<"\n\nAverage Waiting Time="<<avg_wt;
     cout<<"\nAverage Turnaround Time="<<avg_tat;
 
     return 0;
 }
 
-int calcAvgWaitTime(int waitTime, int n){
+int calcAvgWaitTime(int waitTime, int burstTime, int n){
     int avg = 0;
+    int sum = 0;
 	waitTime[0]=0;            //waiting time for first process is zero
 
     //calculate waiting time
     for(int i = 1; i < n; i++)
     {
         waitTime[i]=0;
-        for(j=0;j<i;j++)
-            waitTime[i]+=burstTime[j];
+        for(int j = 0; j < i; j++)
+            waitTime[i] += burstTime[j];
 
-        total+=waitTime[i];
+        sum += waitTime[i];
     }
+
     avg = sum / n;
+
     return avg;
+}
+
+int calcAvgTurnaroundTime(int turnaroundTime, int burstTime, int waitTime, int n){
+	int avg = 0;
+	int sum = 0;
+
+    for(i = 0; i < n; i++)
+    {
+        turnaroundTime[i] = burstTime[i] + waitTime[i];     //calculate turnaround time
+        sum += turnaroundTime[i];
+    }
+
+    avg = sum / n;     //average turnaround time
+
+	return avg;
 }

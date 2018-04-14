@@ -9,26 +9,35 @@
 using namespace std;
 
 class Proc {
+<<<<<<< HEAD
 	public:
 		int process, burstTime, arrivalTime, priority, waitTime, turnaroundTime;
+=======
+public:
+
+    int *burstTime, *process, *waitTime, *turnaroundTime, *priority;
+
+    int inputProcess();
+    int calcAvgWaitTime(int waitTime, int burstTime, int n);
+    int calcAvgTurnaroundTime(int turnaroundTime, int burstTime, int waitTime, int n);
+>>>>>>> ae16323e873e4d82570e0aadf811db70916989da
 };
 
 int main()
 {
+    Proc PE;
 	int i, j, n, pos, temp, avgWaitTime, avgTurnaroundTime;
 //  int burstTime[20], process[20], waitTime[20], turnaroundTime[20], priority[20], i, j, n, total=0, pos, temp, avg_wt, avg_tat;
-    cout<<"Enter Total Number of Process:";
-    cin>>n;
 
     cout<<"\nEnter Burst Time and Priority\n";
     for(i=0;i<n;i++)
     {
         cout<<"\nP["<<i+1<<"]\n";
         cout<<"Burst Time:";
-        cin>>burstTime[i];
+        cin>>PE.burstTime[i];
         cout<<"Priority:";
-        cin>>priority[i];
-        process[i]=i+1;           //contains process number
+        cin>>PE.priority[i];
+        PE.process[i]=i+1;           //contains process number
     }
 
     //sorting burst time, priority and process number in ascending order using selection sort
@@ -57,6 +66,10 @@ int main()
 /*
     waitTime[0]=0;            //waiting time for first process is zero
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> ae16323e873e4d82570e0aadf811db70916989da
      //calculate waiting time
     for(i=1;i<n;i++)
     {
@@ -94,8 +107,20 @@ int main()
 
     return 0;
 }
+int Proc::inputProcess(){
+    int n;
+    cout<<"Enter Total Number of Process:";
+    cin>>n;
+    process = new int[n];
 
+    return n;
+}
+
+<<<<<<< HEAD
 int calcAvgWaitTime(int waitTime, int burstTime, int n){
+=======
+int Proc::calcAvgWaitTime(int waitTime, int burstTime, int n){
+>>>>>>> ae16323e873e4d82570e0aadf811db70916989da
     int avg = 0;
     int sum = 0;
 	waitTime[0]=0;            //waiting time for first process is zero
@@ -115,18 +140,23 @@ int calcAvgWaitTime(int waitTime, int burstTime, int n){
     return avg;
 }
 
-int calcAvgTurnaroundTime(int turnaroundTime, int burstTime, int waitTime, int n){
-	int avg = 0;
-	int sum = 0;
+int Proc::calcAvgTurnaroundTime(int turnaroundTime, int burstTime, int waitTime, int n) {
+    int avg = 0;
+    int sum = 0;
 
+<<<<<<< HEAD
     for(int i = 0; i < n; i++)
     {
+=======
+    for (int i = 0; i < n; i++) {
+>>>>>>> ae16323e873e4d82570e0aadf811db70916989da
         turnaroundTime[i] = burstTime[i] + waitTime[i];     //calculate turnaround time
         sum += turnaroundTime[i];
     }
 
     avg = sum / n;     //average turnaround time
 
+<<<<<<< HEAD
 	return avg;
 }
 
@@ -136,4 +166,8 @@ void outputTable(int n, int runNumber, int avgWaitTime, int avgTurnaroundTime){
     	cout << n << "\t" << runNumber << "\t" << avgWaitTime << "\t"<< avgTurnaroundTime;
     }
 
+=======
+    return avg;
+>>>>>>> ae16323e873e4d82570e0aadf811db70916989da
 }
+

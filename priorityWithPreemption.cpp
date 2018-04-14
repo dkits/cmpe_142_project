@@ -57,6 +57,10 @@ int main()
 /*
     waitTime[0]=0;            //waiting time for first process is zero
 
+<<<<<<< HEAD
+=======
+/*
+>>>>>>> 11b28e68b04e7cda5bf63d1310f9b661a3f739a7
      //calculate waiting time
     for(i=1;i<n;i++)
     {
@@ -92,6 +96,7 @@ int main()
     return 0;
 }
 
+<<<<<<< HEAD
 int calcAvgWaitTime(int waitTime, int burstTime, int n){
     int avg = 0;
     int sum = 0;
@@ -125,4 +130,21 @@ int calcAvgTurnaroundTime(int turnaroundTime, int burstTime, int waitTime, int n
     avg = sum / n;     //average turnaround time
 
 	return avg;
+=======
+int calcAvgWaitTime(int waitTime, int n){
+    int avg = 0;
+	waitTime[0]=0;            //waiting time for first process is zero
+
+    //calculate waiting time
+    for(int i = 1; i < n; i++)
+    {
+        waitTime[i]=0;
+        for(j=0;j<i;j++)
+            waitTime[i]+=burstTime[j];
+
+        total+=waitTime[i];
+    }
+    avg = sum / n;
+    return avg;
+>>>>>>> 11b28e68b04e7cda5bf63d1310f9b661a3f739a7
 }

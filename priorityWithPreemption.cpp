@@ -6,6 +6,7 @@
  */
 
 #include <iostream>
+<<<<<<< HEAD
 
 using namespace std;
 
@@ -17,6 +18,20 @@ int main()
     waitTime = new int[20];
     turnaroundTime = new int[20];
     priority = new int[20];
+=======
+using namespace std;
+
+class Proc {
+	public:
+		int burstTime, process, waitTime, turnaroundTime, priority;
+		int i, j, n, total, pos, temp, avgWaitTime, avgTurnaroundTime;
+
+};
+
+int main()
+{
+    int burstTime[20], process[20], waitTime[20], turnaroundTime[20], priority[20], i, j, n, total=0, pos, temp, avg_wt, avg_tat;
+>>>>>>> parent of 2d7a052... dynamic array w/ class
     cout<<"Enter Total Number of Process:";
     cin>>n;
     process = new int[n];

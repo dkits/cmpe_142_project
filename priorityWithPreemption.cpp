@@ -16,6 +16,7 @@ public:
     int *arrivalTime, *burstTime, *process, *waitTime, *turnaroundTime, *priority, n, avgWaitTime, avgTurnaroundTime;
 
     int inputProcess();
+    void prioritySort(int priority, int burstTime, int process, int n);
 
 
     void prioritySort(int priority, int burstTime, int process);
@@ -69,15 +70,16 @@ int Proc::inputProcess(){
 =======
 
     PE.inputProcess();
-    PE.prioritySort(int priority, int burstTime, int process);
+    PE.prioritySort(int priority, int burstTime, int process, int n);
 
 
     PE.avgWaitTime = PE.calcAvgWaitTime(int waitTime, int burstTime, int n);
     PE.avgTurnaroundTime = PE.calcAvgTurnaroundTime(int turnaroundTime, int burstTime, int waitTime, int n);
-    PE.outputProcess();
+    PE.outputProcess(int n, int runNumber, int avgWaitTime, int avgTurnaroundTime);
 
     return 0;
 }
+
 int Proc::inputProcess(){
     int n;
     cout<<"Enter Total Number of Process:";
@@ -87,10 +89,10 @@ int Proc::inputProcess(){
     return n;
 }
 
+void Proc::prioritySort(int priority, int burstTime, int process, int n){
 >>>>>>> 91b679a71ac977fc17e3d572bfe68dd88d887923
 void Proc::prioritySort(int priority, int burstTime, int process){
 	int temp=0;
-	int n=0;
 	for(int i=0;i<n;i++)
     {
         int pos=i;

@@ -31,6 +31,9 @@ class Proc {
 int main()
 {
     int burstTime[20], process[20], waitTime[20], turnaroundTime[20], priority[20], i, j, n, total=0, pos, temp, avg_wt, avg_tat;
+<<<<<<< HEAD
+>>>>>>> parent of 2d7a052... dynamic array w/ class
+=======
 >>>>>>> parent of 2d7a052... dynamic array w/ class
     cout<<"Enter Total Number of Process:";
     cin>>n;

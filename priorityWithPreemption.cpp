@@ -7,11 +7,23 @@
 
 #include <iostream>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of dda5dee... dynamic array changes "new int"
 using namespace std;
+
+class Proc {
+	public:
+
+        int  *burstTime, *process, *waitTime, *turnaroundTime, *priority;
+        int i, j, n, total=0, pos, temp, avg_wt, avg_tat;
+
+};
 
 int main()
 {
+<<<<<<< HEAD
     int  *burstTime, *process, *waitTime, *turnaroundTime, *priority;
     int i, j, n, total=0, pos, temp, avg_wt, avg_tat;
     burstTime = new int[20];
@@ -35,9 +47,11 @@ int main()
 >>>>>>> parent of 2d7a052... dynamic array w/ class
 =======
 >>>>>>> parent of 2d7a052... dynamic array w/ class
+=======
+    Proc PE;
+>>>>>>> parent of dda5dee... dynamic array changes "new int"
     cout<<"Enter Total Number of Process:";
     cin>>n;
-    process = new int[n];
 
     cout<<"\nEnter Burst Time and Priority\n";
     for(i=0;i<n;i++)

@@ -11,7 +11,7 @@ using namespace std;
 
 int main()
 {
-    int bt[20],p[20],wt[20],tat[20],pr[20],i,j,n,total=0,pos,temp,avg_wt,avg_tat;
+    int burstTime[20], process[20], waitTime[20], turnaroundTime[20], priority[20], i, j, n, total=0, pos, temp, avg_wt, avg_tat;
     cout<<"Enter Total Number of Process:";
     cin>>n;
 
@@ -20,10 +20,10 @@ int main()
     {
         cout<<"\nP["<<i+1<<"]\n";
         cout<<"Burst Time:";
-        cin>>bt[i];
+        cin>>burstTime[i];
         cout<<"Priority:";
-        cin>>pr[i];
-        p[i]=i+1;           //contains process number
+        cin>>priority[i];
+        process[i]=i+1;           //contains process number
     }
 
     //sorting burst time, priority and process number in ascending order using selection sort
@@ -32,33 +32,33 @@ int main()
         pos=i;
         for(j=i+1;j<n;j++)
         {
-            if(pr[j]<pr[pos])
+            if(priority[j]<priority[pos])
                 pos=j;
         }
 
-        temp=pr[i];
-        pr[i]=pr[pos];
-        pr[pos]=temp;
+        temp=priority[i];
+        priority[i]=priority[pos];
+        priority[pos]=temp;
 
-        temp=bt[i];
-        bt[i]=bt[pos];
-        bt[pos]=temp;
+        temp=burstTime[i];
+        burstTime[i]=burstTime[pos];
+        burstTime[pos]=temp;
 
-        temp=p[i];
-        p[i]=p[pos];
-        p[pos]=temp;
+        temp=process[i];
+        process[i]=process[pos];
+        process[pos]=temp;
     }
 
-    wt[0]=0;            //waiting time for first process is zero
+    waitTime[0]=0;            //waiting time for first process is zero
 
     //calculate waiting time
     for(i=1;i<n;i++)
     {
-        wt[i]=0;
+        waitTime[i]=0;
         for(j=0;j<i;j++)
-            wt[i]+=bt[j];
+            waitTime[i]+=burstTime[j];
 
-        total+=wt[i];
+        total+=waitTime[i];
     }
 
     avg_wt=total/n;      //average waiting time
@@ -67,9 +67,9 @@ int main()
     cout<<"\nProcess\t    Burst Time    \tWaiting Time\tTurnaround Time";
     for(i=0;i<n;i++)
     {
-        tat[i]=bt[i]+wt[i];     //calculate turnaround time
-        total+=tat[i];
-        cout<<"\nP["<<p[i]<<"]\t\t  "<<bt[i]<<"\t\t    "<<wt[i]<<"\t\t\t"<<tat[i];
+        turnaroundTime[i]=burstTime[i]+waitTime[i];     //calculate turnaround time
+        total+=turnaroundTime[i];
+        cout<<"\nP["<<process[i]<<"]\t\t  "<<burstTime[i]<<"\t\t    "<<waitTime[i]<<"\t\t\t"<<turnaroundTime[i];
     }
 
     avg_tat=total/n;     //average turnaround time

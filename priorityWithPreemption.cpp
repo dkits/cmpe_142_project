@@ -16,10 +16,8 @@ public:
     int *arrivalTime, *burstTime, *process, *waitTime, *turnaroundTime, *priority, n, avgWaitTime, avgTurnaroundTime;
 
     int inputProcess();
-<<<<<<< HEAD
 
-=======
->>>>>>> 91b679a71ac977fc17e3d572bfe68dd88d887923
+
     void prioritySort(int priority, int burstTime, int process);
     int calcAvgWaitTime(int waitTime, int burstTime, int n);
 

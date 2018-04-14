@@ -6,20 +6,20 @@
  */
 
 #include <iostream>
-
 using namespace std;
+
+class Proc {
+	public:
+		int burstTime, process, waitTime, turnaroundTime, priority;
+		int i, j, n, total, pos, temp, avgWaitTime, avgTurnaroundTime;
+
+};
 
 int main()
 {
-    int  *burstTime, *process, *waitTime, *turnaroundTime, *priority;
-    int i, j, n, total=0, pos, temp, avg_wt, avg_tat;
-    burstTime = new int[20];
-    waitTime = new int[20];
-    turnaroundTime = new int[20];
-    priority = new int[20];
+    int burstTime[20], process[20], waitTime[20], turnaroundTime[20], priority[20], i, j, n, total=0, pos, temp, avg_wt, avg_tat;
     cout<<"Enter Total Number of Process:";
     cin>>n;
-    process = new int[n];
 
     cout<<"\nEnter Burst Time and Priority\n";
     for(i=0;i<n;i++)

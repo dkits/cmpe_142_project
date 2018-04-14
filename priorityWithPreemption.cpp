@@ -10,14 +10,15 @@ using namespace std;
 
 class Proc {
 	public:
-		int burstTime, process, waitTime, turnaroundTime, priority;
-		int i, j, n, total, pos, temp, avgWaitTime, avgTurnaroundTime;
+
+        int  *burstTime, *process, *waitTime, *turnaroundTime, *priority;
+        int i, j, n, total=0, pos, temp, avg_wt, avg_tat;
 
 };
 
 int main()
 {
-    int burstTime[20], process[20], waitTime[20], turnaroundTime[20], priority[20], i, j, n, total=0, pos, temp, avg_wt, avg_tat;
+    Proc PE;
     cout<<"Enter Total Number of Process:";
     cin>>n;
 

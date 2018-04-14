@@ -11,13 +11,12 @@ using namespace std;
 class Proc {
 	public:
 		int burstTime, process, waitTime, turnaroundTime, priority;
-		int i, j, n, total, pos, temp, avgWaitTime, avgTurnaroundTime;
-
 };
 
 int main()
 {
-    int burstTime[20], process[20], waitTime[20], turnaroundTime[20], priority[20], i, j, n, total=0, pos, temp, avg_wt, avg_tat;
+	int i, j, n, pos, temp, avgWaitTime, avgTurnaroundTime;
+//  int burstTime[20], process[20], waitTime[20], turnaroundTime[20], priority[20], i, j, n, total=0, pos, temp, avg_wt, avg_tat;
     cout<<"Enter Total Number of Process:";
     cin>>n;
 
@@ -57,7 +56,8 @@ int main()
 
     waitTime[0]=0;            //waiting time for first process is zero
 
-    //calculate waiting time
+/*
+     //calculate waiting time
     for(i=1;i<n;i++)
     {
         waitTime[i]=0;
@@ -69,6 +69,7 @@ int main()
 
     avg_wt=total/n;      //average waiting time
     total=0;
+*/
 
     cout<<"\nProcess\t    Burst Time    \tWaiting Time\tTurnaround Time";
     for(i=0;i<n;i++)
@@ -85,4 +86,19 @@ int main()
     return 0;
 }
 
+int calcAvgWaitTime(int waitTime, int n){
+    int avg = 0;
+	waitTime[0]=0;            //waiting time for first process is zero
 
+    //calculate waiting time
+    for(int i = 1; i < n; i++)
+    {
+        waitTime[i]=0;
+        for(j=0;j<i;j++)
+            waitTime[i]+=burstTime[j];
+
+        total+=waitTime[i];
+    }
+    avg = sum / n;
+    return avg;
+}

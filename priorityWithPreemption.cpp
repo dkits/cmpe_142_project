@@ -17,12 +17,14 @@ public:
 
     int inputProcess();
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
     void prioritySort(int priority, int burstTime, int process, int n);
 =======
 <<<<<<< HEAD
+>>>>>>> 06497f6eae554fa62f35da5aca80eac736f3cdc9
 
-=======
->>>>>>> 91b679a71ac977fc17e3d572bfe68dd88d887923
+
     void prioritySort(int priority, int burstTime, int process);
 >>>>>>> bdab0a2757e5e348cd9a334f7e316a3b4d81745d
     int calcAvgWaitTime(int waitTime, int burstTime, int n);

@@ -16,7 +16,7 @@ public:
     int *arrivalTime, *burstTime, *process, *waitTime, *turnaroundTime, *priority;
     int runNumber, n, avgWaitTime, avgTurnaroundTime;
 
-    void inputValues();
+    void inputValues(int n);
 
     void prioritySort(int priority, int burstTime, int process, int n);
 
@@ -36,7 +36,7 @@ int main()
 {
     Proc PE;
 
-    PE.inputValues();
+    PE.inputValues(50);
 
     cout<<"\nEnter Burst Time and Priority\n";
 
@@ -49,11 +49,12 @@ int main()
     return 0;
 }
 
-void Proc::inputValues(){
-    int n;
-    cout<<"Enter Total Number of Process:";
-    cin>>n;
+void Proc::inputValues(int n){
+
     process = new int[n];
+    burstTime = new int[n]; 
+    priority = new int[n];
+    arrivalTime = new int[n];
 
     cout << "Enter seed Value:" << endl;
     cin >> runNumber;

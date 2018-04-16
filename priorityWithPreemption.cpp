@@ -16,9 +16,9 @@ public:
     int *arrivalTime, *burstTime, *process, *waitTime, *turnaroundTime, *priority;
     int runNumber, n, avgWaitTime, avgTurnaroundTime;
 
-    void inputValues(int n);
+    void inputValues(int value);
 
-    void prioritySort(int priority, int burstTime, int process, int n);
+    void prioritySort();
 
 
 
@@ -49,10 +49,11 @@ int main()
     return 0;
 }
 
-void Proc::inputValues(int n){
+void Proc::inputValues(int value){
 
+    n = value;
     process = new int[n];
-    burstTime = new int[n]; 
+    burstTime = new int[n];
     priority = new int[n];
     arrivalTime = new int[n];
 
@@ -75,7 +76,7 @@ void Proc::inputValues(int n){
 
 }
 
-void Proc::prioritySort(int priority, int burstTime, int process, int n) {
+void Proc::prioritySort() {
     int temp = 0;
     for (int i = 0; i < n; i++) {
         int pos = i;

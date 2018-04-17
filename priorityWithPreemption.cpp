@@ -51,6 +51,52 @@ int main()
     return 0;
 }
 
+/*
+ * ******************************************************************
+
+
+int time = 0;	//count up globally
+int highest = 1;
+P[0].AT = 0;
+P[i].runtime = P[i].BT;	//count down from BT because we need total BT to calculate avg
+string P[i].priorityLvl = highest;
+
+func runProcess(){
+	while ((time < P.AT[i+1] && P[i].runtime > 0} || (P[i].priorityLvl == highest && P[i].runtime > 0){
+		P[i].runtime = P[i].runtime - 1;
+		time++;
+	}
+}
+
+if (P[i].AT == time)
+{
+	runProcess();
+}
+
+if ((P[i+1].AT == time) && (P[i+1].priority < P[i].priority)){
+	//swap running process
+	temp = P[i];
+	P[i] = P[i+1];
+	P[i+1] = temp;
+	//P[i+1].priorityLvl = highest;
+	runProcess();
+}
+else {
+	runProcess();
+}
+
+if ((P[i].AT <= time) && (P[i].priority == highest)){
+	runProcess();
+}
+
+while ((highest > i) && (priorityLvl)){
+	highest++;
+}
+
+
+ * ******************************************************************
+*/
+
 void Proc::inputValues(int value){
 
     n = value;

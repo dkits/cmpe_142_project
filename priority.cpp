@@ -13,7 +13,7 @@ class Proc {
 public:
 
 	int arrivalTime, burstTime, priority, process, turnaroundTime, waitTime;
-	int runNumber, n, currentTime, avgWaitTime, avgTurnaroundTime;
+	int runNumber, n, completionTime, avgWaitTime, avgTurnaroundTime;
 	bool isDone;
 
     void inputValues(int runNumber);
@@ -25,18 +25,21 @@ public:
 
 int main() {
 
-	int n = 5, runNumber = 1;
+
+	int n = 5, runNumber = 3;
 
 	Proc PE[n];
 
 	int totalBurstTime = 0, totalWaitTime = 0, totalTurnaroundTime = 0;
 	int i, j, largest, avgWaitTime, avgTurnaroundTime;
 
+	//totalBurstTime = PE.inputValues(runNumber);
+
 	srand(runNumber);
 
 	//Input values (SUCCESSFUL)
 	for (i = 0; i < n; i++){
-		PE[i].arrivalTime = rand() % 1000 + 1;
+		PE[i].arrivalTime = rand() % 100 + 1;
 		//Burst Time
         PE[i].burstTime = rand() % 100 + 1;
         //Priority
@@ -72,7 +75,9 @@ int main() {
 
     cout << "Total burst time: " << totalBurstTime << endl;
 
-    //Priority Sort (SUCCESSFUL??)
+    //Priority Sort (SUCCESSFUL?? No, this is only nonpreemptive priority)
+    Proc temp2[n];
+    temp2[n-1].priority = -9;
     for(i = 0; i < n; i++)
     {
     	cout << "Process: " << i << " ArrivalTime: " << PE[i].arrivalTime << " Priority: "<< PE[i].priority << endl;
@@ -84,10 +89,11 @@ int main() {
 
     	for(i = 0; i < n; i++)
     	{
-    	      if(PE[i].arrivalTime <= time && PE[i].isDone != true && PE[i].priority > PE[largest].priority)
-    	      {
-    	            largest = i;
-    	      }
+    		if((PE[0].arrivalTime <= time && PE[0].isDone != true && PE[0].priority > temp2[largest].priority)
+    				|| (PE[i].arrivalTime <= time && PE[i].isDone != true && PE[i].priority > PE[largest].priority))
+    		{
+    			largest = i;
+    		}
     	}
 
     	cout << "Time " << time << endl;
@@ -96,14 +102,21 @@ int main() {
 
     	cout << "Largest burst time " << PE[largest].burstTime << endl;
 
-    	PE[largest].currentTime = time;
-    	PE[largest].waitTime = PE[largest].currentTime - PE[largest].arrivalTime - PE[largest].burstTime;
-        PE[largest].turnaroundTime = PE[largest].currentTime - PE[largest].arrivalTime;
+    	PE[largest].completionTime = time;
+
+    	cout << "Completion time: " << PE[largest].completionTime <<
+    			" Arrival time: " << PE[largest].arrivalTime <<
+				" Burst time: " << PE[largest].burstTime << endl;
+
+    	PE[largest].waitTime = PE[largest].completionTime - PE[largest].arrivalTime - PE[largest].burstTime;
+        PE[largest].turnaroundTime = PE[largest].completionTime - PE[largest].arrivalTime;
         PE[largest].isDone = true;
 
         totalWaitTime = totalWaitTime + PE[largest].waitTime;
         totalTurnaroundTime = totalTurnaroundTime + PE[largest].turnaroundTime;
 
+        cout << "Largest wait time " << PE[largest].waitTime << endl;
+        cout << "Largest turnaround time " << PE[largest].turnaroundTime << endl;
         cout << "Total wait time " << totalWaitTime << endl;
         cout << "Total turnaround time " << totalTurnaroundTime << endl;
     }
@@ -114,11 +127,59 @@ int main() {
     cout << "Average wait time " << avgWaitTime << endl;
     cout << "Average turnaround time " << avgTurnaroundTime << endl;
 
+    cout << "\nN\t	Run number\t    Avg. waiting time\t	Avg. turnaround time" << endl;
+    cout << n << "\t	" << runNumber << "\t\t    " << avgWaitTime << "\t\t\t	"<< avgTurnaroundTime;
+
 	return 0;
 }
 
 void Proc::inputValues(int runNumber){
 
+	/*
+	Proc PE[n];
+	int totalBurstTime;
+	srand(runNumber);
+
+		//Input values (SUCCESSFUL)
+		for (int i = 0; i < n; i++){
+			PE[i].arrivalTime = rand() % 1000 + 1;
+			//Burst Time
+	        PE[i].burstTime = rand() % 100 + 1;
+	        //Priority
+			PE[i].priority = rand() % 10 + 1;
+			//Process Number
+			PE[i].process = n+1;
+			PE[i].isDone = false;
+			totalBurstTime = totalBurstTime + PE[i].burstTime;
+
+			cout<<"Arrival Time: "<<PE[i].arrivalTime<<" Burst time: "<<PE[i].burstTime
+			    <<" Priority: "<<PE[i].priority<<endl;
+		}
+
+		return totalBurstTime;
+	*/
+
+}
+
+void Proc::prioritySort(int value){
+
 
 
 }
+
+void Proc::calcAvgWaitTime(){
+
+
+
+}
+
+void Proc::calcAvgTurnaroundTime() {
+
+
+
+}
+
+
+
+
+

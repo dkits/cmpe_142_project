@@ -23,7 +23,6 @@ void process::runNumberTester(int runNum, int processAmt) {
     limit = processAmt;
     srand(runNum);
 
-    //Input values (SUCCESSFUL)
     for (i = 0, c = 1; i < limit; i++, c++){
         process_queue[i].process_name = c;
         process_queue[i].arrival_time = rand() % 1000 + 1;
@@ -53,7 +52,6 @@ void process::runNumberTester(int runNum, int processAmt) {
         }
     }
     process_queue[processAmt -1].priority = -9999;
-//      cout << "\nProcess Name\tArrival Time\tBurst Time\tPriority\tWaiting Time" << endl;
 
     for(time = process_queue[0].arrival_time; time < burst_time;)
     {
@@ -65,7 +63,6 @@ void process::runNumberTester(int runNum, int processAmt) {
                 largest = i;
             }
         }
-//          cout << "HH"<<process_queue[largest].burst_time << "HH \n";
         time = time + process_queue[largest].burst_time;
         process_queue[largest].ct = time;
         process_queue[largest].waiting_time = process_queue[largest].ct - process_queue[largest].arrival_time - process_queue[largest].burst_time;
@@ -73,18 +70,12 @@ void process::runNumberTester(int runNum, int processAmt) {
         process_queue[largest].status = 1;
         wait_time = wait_time + process_queue[largest].waiting_time;
         turnaround_time = turnaround_time + process_queue[largest].turnaround_time;
-//            cout<<"\nProcess name: "<<process_queue[largest].process_name
-//            		<<"\t\t"<<process_queue[largest].arrival_time
-//					<<"\t\t"<<process_queue[largest].burst_time
-//					<<"\t\t"<<process_queue[largest].priority
-//					<<"\t\t"<<process_queue[largest].waiting_time ;
     }
     average_waiting_time = wait_time / limit;
     average_turnaround_time = turnaround_time / limit;
     cout<<limit<<"\t\t"<<runNum<<"\t\t    "<< average_waiting_time << "\t\t\t\t"<< average_turnaround_time << endl;
 
-//      cout << "\n\nAverage waiting time:\t" << average_waiting_time << endl;
-//      cout << "Average Turnaround Time:\t" << average_turnaround_time << endl;
+
 
 }
 
@@ -112,9 +103,6 @@ int main()
     Proc.runNumberTester(3, 150);
     Proc.runNumberTester(4, 150);
     Proc.runNumberTester(5, 150);
-
-
-
 
 
     return 0;

@@ -1,7 +1,7 @@
 /*
  * priorityWithPreemption.cpp
  *
- *  Created on: Apr 14, 2018
+ *  Created on: Apr 20, 2018
  *      Author: dan95
  */
 
@@ -9,188 +9,102 @@
 #include <stdlib.h>
 using namespace std;
 
-class Proc {
 
-public:
-//Process is 150 for all values
-    int *arrivalTime, *burstTime, *process, *waitTime, *turnaroundTime, *priority;
-    int runNumber, n, avgWaitTime, avgTurnaroundTime;
+struct process
+{
+      int process_name;
+      int arrival_time, burst_time, ct, waiting_time, turnaround_time, priority;
+      int status;
+        int limit;
+    void runNumberTester(int runNum, int processAmt);
+}process_queue[150];
 
-    void inputValues(int value);
+void process::runNumberTester(int runNum, int processAmt) {
 
-    void prioritySort();
+    int i, time = 0, burst_time = 0, largest;
+    int c;
+    float wait_time = 0, turnaround_time = 0, average_waiting_time, average_turnaround_time;
+    limit = processAmt;
+    srand(runNum);
 
+    //Input values
+    for (i = 0, c = 1; i < limit; i++, c++){
+        process_queue[i].process_name = c;
+        process_queue[i].arrival_time = rand() % 1000 + 1;
+        //Burst Time
+        process_queue[i].burst_time = rand() % 100 + 1;
+        //Priority
+        process_queue[i].priority = rand() % 10 + 1;
+        //Process Number
+        process_queue[i].status = 0;
+        burst_time = burst_time + process_queue[i].burst_time;
+    }
 
+    //Sort by arrival time
+    struct process temp;
+    int k, j;
+    for(k = 0; k < limit - 1; k++)
+    {
+        for(j = i + 1; j < limit; j++)
+        {
+            if(process_queue[k].arrival_time > process_queue[j].arrival_time)
+            {
+                temp = process_queue[k];
+                process_queue[k] = process_queue[j];
+                process_queue[j] = temp;
+            }
+        }
+    }
 
-    void calcAvgWaitTime();
+    //Preemptive priority sort
+    process_queue[processAmt -1].priority = -9999;
 
-    void calcAvgTurnaroundTime();
+    for(time = process_queue[0].arrival_time; time < burst_time;)
+    {
+        largest = processAmt -1;
+        for(i = 0; i < limit; i++)
+        {
+            if(process_queue[i].arrival_time <= time && process_queue[i].status != 1 && process_queue[i].priority > process_queue[largest].priority)
+            {
+                largest = i;
+            }
+        }
 
+        time = time + process_queue[largest].burst_time;
+        process_queue[largest].ct = time;
+        process_queue[largest].waiting_time = process_queue[largest].ct - process_queue[largest].arrival_time - process_queue[largest].burst_time;
+        process_queue[largest].turnaround_time = process_queue[largest].ct - process_queue[largest].arrival_time;
+        process_queue[largest].status = 1;
+        wait_time = wait_time + process_queue[largest].waiting_time;
+        turnaround_time = turnaround_time + process_queue[largest].turnaround_time;
+    }
 
-    void outputProcess(int runNumber);
-
-};
+    //Calculations of averages
+    average_waiting_time = wait_time / limit;
+    average_turnaround_time = turnaround_time / limit;
+    cout<<limit<<"\t\t"<<runNum<<"\t\t    "<< average_waiting_time << "\t\t\t"<< average_turnaround_time << endl;
+}
 
 int main()
 {
-    Proc PE;
+    process Proc;
+    cout << "N\t	Run number\t    Avg. waiting time\t	Avg. turnaround time" << endl;
 
-    PE.inputValues(50);
-    PE.prioritySort();
-    PE.calcAvgWaitTime();
-    PE.calcAvgTurnaroundTime();
-    PE.outputProcess(1);
-
-
-
-
-//    PE.avgWaitTime = PE.calcAvgWaitTime(int waitTime, int burstTime, int n);
-//    PE.avgTurnaroundTime = PE.calcAvgTurnaroundTime(int turnaroundTime, int burstTime, int waitTime, int n);
-//    PE.outputProcess(int n, int runNumber, int avgWaitTime, int avgTurnaroundTime);
+    Proc.runNumberTester(1, 50);
+    Proc.runNumberTester(2, 50);
+    Proc.runNumberTester(3, 50);
+    Proc.runNumberTester(4, 50);
+    Proc.runNumberTester(5, 50);
+    Proc.runNumberTester(1, 100);
+    Proc.runNumberTester(2, 100);
+    Proc.runNumberTester(3, 100);
+    Proc.runNumberTester(4, 100);
+    Proc.runNumberTester(5, 100);
+    Proc.runNumberTester(1, 150);
+    Proc.runNumberTester(2, 150);
+    Proc.runNumberTester(3, 150);
+    Proc.runNumberTester(4, 150);
+    Proc.runNumberTester(5, 150);
 
     return 0;
 }
-
-/*
- * ******************************************************************
-
-
-int time = 0;	//count up globally
-int highest = 1;
-P[0].AT = 0;
-P[i].runtime = P[i].BT;	//count down from BT because we need total BT to calculate avg
-string P[i].priorityLvl = highest;
-
-func runProcess(){
-	while ((time < P.AT[i+1] && P[i].runtime > 0} || (P[i].priorityLvl == highest && P[i].runtime > 0){
-		P[i].runtime = P[i].runtime - 1;
-		time++;
-	}
-}
-
-if (P[i].AT == time)
-{
-	runProcess();
-}
-
-if ((P[i+1].AT == time) && (P[i+1].priority < P[i].priority)){
-	//swap running process
-	temp = P[i];
-	P[i] = P[i+1];
-	P[i+1] = temp;
-	//P[i+1].priorityLvl = highest;
-	runProcess();
-}
-else {
-	runProcess();
-}
-
-if ((P[i].AT <= time) && (P[i].priority == highest)){
-	runProcess();
-}
-
-while ((highest > i) && (priorityLvl)){
-	highest++;
-}
-
-
- * ******************************************************************
-*/
-
-void Proc::inputValues(int value){
-
-    n = value;
-    process = new int[n];
-    burstTime = new int[n];
-    priority = new int[n];
-    arrivalTime = new int[n];
-    waitTime = new int[n];
-    turnaroundTime = new int[n];
-
-    cout << "Enter seed Value:" << endl;
-    cin >> runNumber;
-    srand(runNumber);
-    for(int i=0;i<n;i++)
-    {
-
-        //Burst Time
-        burstTime[i] = rand() % 100 + 1;
-        //Priority
-        priority[i] = rand() % 10 + 1;
-        //Arrival Time
-        arrivalTime[i] = rand() % 1000 + 1;
-
-        process[i]=i+1;           //process number
-
-    }
-
-}
-
-void Proc::prioritySort() {
-    int temp = 0;
-    for (int i = 0; i < n; i++) {
-        int pos = i;
-        for (int j = i + 1; j < n; j++) {
-            if (arrivalTime[j] < arrivalTime[pos])
-                pos = j;
-        }
-
-        temp = arrivalTime[i];
-        arrivalTime[i] = arrivalTime[pos];
-        arrivalTime[pos] = temp;
-
-        temp = burstTime[i];
-        burstTime[i] = burstTime[pos];
-        burstTime[pos] = temp;
-
-        temp = process[i];
-        process[i] = process[pos];
-        process[pos] = temp;
-
-        cout<<"Process: "<<process[i]<<" BT: "<<burstTime[i]<<" Pr: "<<priority[i]<<" AT: "<<arrivalTime[i]<<endl;
-    }
-}
-
-
-
-
-void Proc::calcAvgWaitTime(){
-    int avg = 0;
-    int sum = 0;
-	waitTime[0]=0;            //waiting time for first process is zero
-
-    //calculate waiting time
-    for(int i = 1; i < n; i++)
-    {
-        waitTime[i]=0;
-        for(int j = 0; j < i; j++)
-            waitTime[i] += burstTime[j];
-
-        sum += waitTime[i];
-    }
-
-    avgWaitTime = sum / n;
-
-}
-
-void Proc::calcAvgTurnaroundTime() {
-    int avg = 0;
-    int sum = 0;
-
-    for(int i = 0; i < n; i++)
-    {
-        turnaroundTime[i] = burstTime[i] + waitTime[i];     //calculate turnaround time
-        sum += turnaroundTime[i];
-    }
-
-    avgTurnaroundTime = sum / n;     //average turnaround time
-
-}
-
-void Proc::outputProcess(int runNumber){
-    cout << "\nN\t	Run number\t    Avg. waiting time\t	Avg. turnaround time" << endl;
-    /*for (int i = 0; i < n; i++)*/{
-    	cout << n << "\t" << runNumber << "\t" << avgWaitTime << "\t"<< avgTurnaroundTime;
-    }
-}
-

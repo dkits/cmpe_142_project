@@ -13,7 +13,10 @@ struct process
 }process_queue[150];
 
 void process::runNumberTester(int runNum, int processAmt) {
-
+    if(processAmt <= 0){
+        cout << "Error, process amount cannot be 0 or less\n";
+        return;
+    }
     int i, time = 0, burst_time = 0, largest;
     int c;
     float wait_time = 0, turnaround_time = 0, average_waiting_time, average_turnaround_time;

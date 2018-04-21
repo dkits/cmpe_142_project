@@ -49,12 +49,12 @@ void process::runNumberTester(int runNum, int processAmt) {
             }
         }
     }
-    process_queue[processAmt].priority = -9999;
+    process_queue[processAmt -1].priority = -9999;
 //      cout << "\nProcess Name\tArrival Time\tBurst Time\tPriority\tWaiting Time" << endl;
 
     for(time = process_queue[0].arrival_time; time < burst_time;)
     {
-        largest = processAmt;
+        largest = processAmt -1;
         for(i = 0; i < limit; i++)
         {
             if(process_queue[i].arrival_time <= time && process_queue[i].status != 1 && process_queue[i].priority > process_queue[largest].priority)
@@ -94,11 +94,11 @@ int main()
     process Proc;
     cout << "N\t	Run number\t    Avg. waiting time\t	Avg. turnaround time" << endl;
     //Somthing wring with 50s
-//    Proc.runNumberTester(1, 50);
-//    Proc.runNumberTester(2, 50);
-//    Proc.runNumberTester(3, 50);
-//    Proc.runNumberTester(4, 50);
-//    Proc.runNumberTester(5, 50);
+    Proc.runNumberTester(1, 50);
+    Proc.runNumberTester(2, 50);
+    Proc.runNumberTester(3, 50);
+    Proc.runNumberTester(4, 50);
+    Proc.runNumberTester(5, 50);
     Proc.runNumberTester(1, 100);
     Proc.runNumberTester(2, 100);
     Proc.runNumberTester(3, 100);

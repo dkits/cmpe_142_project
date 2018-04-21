@@ -28,39 +28,43 @@ public:
 
 int main() {
 
-/*
- 	for(int n = 50; n < 150 ; n = n + 50){
-		for(int runNumber = 1; runNumber < 6 ; runNumber++){
-		//int main
-	 	}
+//	cout << "N\t	Run number\t    Avg. waiting time\t	Avg. turnaround time" << endl;
+
+//	for(int n = 50; n <= 150; n = n + 50){
+//		for(int runNumber = 1; runNumber < 6 ; runNumber++){
+
+			int n = 5, runNumber = 1;
+
+			Proc PE[n];
+
+			int totalBurstTime = 0, totalWaitTime = 0, totalTurnaroundTime = 0;
+			int i, j, largest, avgWaitTime, avgTurnaroundTime;
+			int totalAT;
+
+			srand(runNumber);
+
+			//Input values (SUCCESSFUL)
+			for (i = 0; i < n; i++){
+				PE[i].arrivalTime = rand() % 1000 + 1;
+				//Burst Time
+				PE[i].burstTime = rand() % 100 + 1;
+				//Priority
+				PE[i].priority = rand() % 10 + 1;
+				//Process Number
+				PE[i].process = i+1;
+				PE[i].isDone = false;
+				totalBurstTime = totalBurstTime + PE[i].burstTime;
+
+				cout<<"Process: "<<PE[i].process
+						<<" Arrival Time: "<<PE[i].arrivalTime<<" Burst time: "<<PE[i].burstTime
+						<<" Priority: "<<PE[i].priority<<" isDone: "<<PE[i].isDone<<endl;
+			}
+			cout<<n<<"\t\t"<<runNumber<<"\t\t    "
+//					<<totalBurstTime<<"\t\t\t\t"<<totalBurstTime<<endl;
+			<< avgWaitTime << "\t\t\t\t"<< avgTurnaroundTime << endl;
+		}
 	}
-*/
-/*
-	int n = 5, runNumber = 1;
 
-	Proc PE[n];
-
-	int totalBurstTime = 0, totalWaitTime = 0, totalTurnaroundTime = 0;
-	int i, j, largest, avgWaitTime, avgTurnaroundTime;
-
-	srand(runNumber);
-
-	//Input values (SUCCESSFUL)
-	for (i = 0; i < n; i++){
-		PE[i].arrivalTime = rand() % 1000 + 1;
-		//Burst Time
-        PE[i].burstTime = rand() % 100 + 1;
-        //Priority
-		PE[i].priority = rand() % 10 + 1;
-		//Process Number
-		PE[i].process = n+1;
-		PE[i].isDone = false;
-		totalBurstTime = totalBurstTime + PE[i].burstTime;
-
-		cout<<"Process: "<<PE[i].process
-			<<" Arrival Time: "<<PE[i].arrivalTime<<" Burst time: "<<PE[i].burstTime
-		    <<" Priority: "<<PE[i].priority<<" isDone: "<<PE[i].isDone<<endl;
-	}
 
 	//Sort arrival time of processes (SUCCESSFUL)
 	cout << "Sorting arrival time..." << endl;
@@ -128,11 +132,12 @@ int main() {
 
     cout << "Average wait time " << avgWaitTime << endl;
     cout << "Average turnaround time " << avgTurnaroundTime << endl;
-
+*/
+/*
 	return 0;
 }
-
 */
+
 #include <iostream>
 #include <stdlib.h>
 using namespace std;
@@ -142,7 +147,7 @@ struct process
       char process_name;
       int arrival_time, burst_time, ct, waiting_time, turnaround_time, priority;
       int status;
-}process_queue[10];
+}process_queue[150];
 
 int limit;
 
@@ -169,6 +174,13 @@ int main()
       int i, time = 0, burst_time = 0, largest;
       char c;
       float wait_time = 0, turnaround_time = 0, average_waiting_time, average_turnaround_time;
+
+//      cout << "N\t	Run number\t    Avg. waiting time\t	Avg. turnaround time" << endl;
+
+//      for(int n = 50; n <= 150; n = n + 50){
+//    	  limit = n;
+//    	  for(int runNumber = 1; runNumber < 6 ; runNumber++){
+
       cout << "\nEnter Total Number of Processes:\t" << endl;
       cin >> limit;
       srand(1);
@@ -188,6 +200,8 @@ int main()
     	  cout<<"Arrival Time: "<<process_queue[i].arrival_time<<" Burst time: "<<process_queue[i].burst_time
     			  <<" Priority: "<<process_queue[i].priority<<endl;
       }
+
+      cout << "Total burst time: " << burst_time << endl;
       /*
       for(i = 0, c = 'A'; i < limit; i++, c++)
       {
@@ -204,12 +218,13 @@ int main()
       }
       */
       Arrival_Time_Sorting();
-      process_queue[9].priority = -9999;
+      process_queue[150].priority = -9999;
       cout << "\nProcess Name\tArrival Time\tBurst Time\tPriority\tWaiting Time" << endl;
       // Code works until here
+
       for(time = process_queue[0].arrival_time; time < burst_time;)
       {
-            largest = 9;
+    	  largest = 150;
             for(i = 0; i < limit; i++)
             {
                   if(process_queue[i].arrival_time <= time && process_queue[i].status != 1 && process_queue[i].priority > process_queue[largest].priority)
@@ -230,11 +245,13 @@ int main()
 					<<"\t\t"<<process_queue[largest].priority
 					<<"\t\t"<<process_queue[largest].waiting_time << endl;
       }
+
       average_waiting_time = wait_time / limit;
       average_turnaround_time = turnaround_time / limit;
       cout << "\n\nAverage waiting time:\t" << average_waiting_time << endl;
       cout << "Average Turnaround Time:\t" << average_turnaround_time << endl;
-
+//    	  }
+//      }
 
       return 0;
 }
